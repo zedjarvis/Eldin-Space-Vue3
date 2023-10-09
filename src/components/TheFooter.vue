@@ -1,16 +1,13 @@
+<script setup lang="ts"></script>
+
 <template>
-  <v-footer class="pa-3">
-    Developed with&nbsp
-    <v-icon small color="red">fas fa-heart</v-icon>&nbspand&nbsp
-    <v-icon small color="green">fab fa-vuejs</v-icon>
-    <v-spacer></v-spacer>
+  <VFooter class="pa-3">
+    Developed with&nbsp;
+    <VIcon size="small" color="red" icon="mdi-heart" />&nbsp;and &nbsp;
+    <VIcon size="small" color="green" icon="mdi-vuejs" />
+    <VSpacer />
     <div>&copy; {{ new Date().getFullYear() }}</div>
-  </v-footer>
+  </VFooter>
 </template>
 
-<script>
-export default {};
-</script>
-
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

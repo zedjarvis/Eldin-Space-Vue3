@@ -1,85 +1,68 @@
+<script setup lang="ts">
+// utilities
+import { ref } from 'vue';
+
+const drawer = ref<boolean | null>(null);
+
+const emit = defineEmits<{
+  (e: "toggleTheme"): void
+}>();
+</script>
+
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" absolute temporary app width="150" height="340">
-      <v-list class="pt-4">
-        <v-list-tile active-class="green--text" to="/">
-          <v-list-tile-content>
-            <v-list-tile-title>HOME</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="green--text" to="/resume">
-          <v-list-tile-content>
-            <v-list-tile-title>RESUME</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="green--text" to="/services">
-          <v-list-tile-content>
-            <v-list-tile-title>SERVICES</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="green--text" to="/portfolio">
-          <v-list-tile-content>
-            <v-list-tile-title>PORTFOLIO</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="green--text" to="/blog">
-          <v-list-tile-content>
-            <v-list-tile-title>BLOG</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile active-class="green--text" to="/contact">
-          <v-list-tile-content>
-            <v-list-tile-title>CONTACT</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar flat dense color="transparent" scroll-off-screen>
-      <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title class="headline">
+    <VNavigationDrawer v-model="drawer" absolute temporary width="150" height="340">
+      <VList class="pt-4">
+        <VListItem active-class="text-green" title="HOME" />
+        <VListItem active-class="text-green" title="RESUME" />
+        <VListItem active-class="text-green" title="SERVICES" />
+        <VListItem active-class="text-green" title="PORTFOLIO" />
+        <VListItem active-class="text-green" title="BLOG" />
+        <VListItem active-class="text-green" title="CONTACT" />
+      </VList>
+    </VNavigationDrawer>
+    <VToolbar density="compact" flat color="transparent" class="px-7">
+      <VAppBarNavIcon class="d-flex d-md-none" />
+      <VToolbarTitle class="logo ml-6">
         <span class="font-weight-light">Eldin</span>
-        <span class="green--text">Zaimovic</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn @click="changeTheme" depressed small icon class="hidden-md-and-up">
-        <v-icon v-if="goDark==true">fas fa-sun</v-icon>
-        <v-icon v-else>fas fa-moon</v-icon>
-      </v-btn>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat to="/" active-class="green--text headline">Home</v-btn>
-        <v-btn flat to="/resume" active-class="green--text headline">Resume</v-btn>
-        <v-btn flat to="/services" active-class="green--text headline">Services</v-btn>
-        <v-btn flat to="/portfolio" active-class="green--text headline">Portfolio</v-btn>
-        <v-btn flat to="/blog" active-class="green--text headline">Blog</v-btn>
-        <v-btn flat to="/contact" active-class="green--text headline">Contact</v-btn>
-        <v-btn @click="changeTheme" depressed small icon>
-          <v-icon v-if="goDark==true">fas fa-sun</v-icon>
-          <v-icon v-else>fas fa-moon</v-icon>
-        </v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+        <span class="text-green font-weight-medium">Zaimovic</span>
+      </VToolbarTitle>
+      <VSpacer></VSpacer>
+      <VBtn class="d-flex d-md-none" icon="mdi-weather-night" size="24px" flat />
+      <VToolbarItems class="d-sm-none d-md-flex">
+        <VBtn flat variant="text" text="Home" class="nav_link" />
+        <VBtn flat text="Resume" />
+        <VBtn flat text="Services" />
+        <VBtn flat text="Portfolio" />
+        <VBtn flat text="blog" />
+        <VBtn flat text="Contact" />
+        <VBtn icon="mdi-weather-night" rounded style="margin: 0 6px;" />
+      </VToolbarItems>
+    </VToolbar>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    goDark: {
-      type: Boolean
-    }
-  },
-  data() {
-    return {
-      drawer: null
-    };
-  },
-  methods: {
-    changeTheme() {
-      this.$emit("changeTheme", this.goDark);
-    }
-  }
-};
-</script>
+<style lang="scss">
+.logo {
+  font-size: 24px !important;
+  line-height: 32px !important;
+}
 
-<style >
+.v-btn .v-btn--active {
+  color: green;
+  font-size: 24px !important;
+  line-height: 32px !important;
+}
+
+.nav_link {
+  font-size: 14px;
+
+  & .v-btn__content {
+    font-size: 14px !important;
+  }
+
+  & .v-btn__underlay {
+    display: none;
+  }
+}
 </style>
